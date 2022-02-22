@@ -16,8 +16,13 @@ class Message extends Equatable {
   });
 
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [
+        name,
+        email,
+        phoneNumber,
+        message,
+        ip,
+      ];
 
   Message copyWith({
     String? name,
