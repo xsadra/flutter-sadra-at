@@ -15,12 +15,13 @@ dependencies:
   universal_platform: ^1.0.0+1
   url_launcher: ^6.0.20
   http: ^0.13.4
-  google_fonts: ^2.1.0
+  google_fonts: ^2.3.1
   intl: ^0.17.0
-  just_audio: ^0.9.18
-  bloc: ^8.0.1
+  just_audio: ^0.9.20
+  bloc: ^8.0.2
   equatable: ^2.0.3
   fake_async: ^1.2.0
+  gap: ^2.0.0
 
 dev_dependencies:
   flutter_test:
