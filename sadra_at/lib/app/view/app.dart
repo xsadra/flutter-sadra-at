@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart' as http;
+import 'package:sadra_at/main/main.dart';
 
 import '../../helpers/helpers.dart';
 import '../../l10n/l10n.dart';
@@ -59,7 +60,7 @@ class _AppState extends State<App> {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: Container(),
+      home: const MainPage(),
     );
   }
 }

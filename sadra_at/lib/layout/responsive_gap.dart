@@ -34,3 +34,31 @@ class ResponsiveGap extends StatelessWidget {
     );
   }
 }
+
+class ResponsiveHGap extends StatelessWidget {
+  /// {@macro responsive_gap}
+  const ResponsiveHGap({
+    Key? key,
+    this.small = 0,
+    this.medium = 0,
+    this.large = 0,
+  }) : super(key: key);
+
+  /// A gap rendered on a small layout.
+  final double small;
+
+  /// A gap rendered on a medium layout.
+  final double medium;
+
+  /// A gap rendered on a large layout.
+  final double large;
+
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveLayoutBuilder(
+      small: (_, __) => SizedBox(height: small),
+      medium: (_, __) => SizedBox(height: medium),
+      large: (_, __) => SizedBox(height: large),
+    );
+  }
+}
