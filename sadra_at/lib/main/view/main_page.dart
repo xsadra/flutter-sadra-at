@@ -34,7 +34,7 @@ class _Main extends StatelessWidget {
       builder: (context, constraints) {
         return Stack(
           children: [
-            Container(
+            SizedBox(
               height: double.infinity,
               width: double.infinity,
               child: Image.asset('assets/images/bg.jpg', fit: BoxFit.cover),
