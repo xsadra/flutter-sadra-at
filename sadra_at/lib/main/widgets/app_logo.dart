@@ -19,9 +19,8 @@ class AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final assetName = isColored
-        ? 'assets/images/logo_flutter_color.png'
-        : 'assets/images/logo_flutter_white.png';
+    final assetName =
+        isColored ? 'assets/images/logo.png' : 'assets/images/logo.png';
 
     return AnimatedSwitcher(
       duration: MainThemeAnimationDuration.logoChange,
@@ -34,15 +33,15 @@ class AppLogo extends StatelessWidget {
               key: Key(assetName),
               small: (_, __) => Image.asset(
                 assetName,
-                height: 24,
+                height: 64,
               ),
               medium: (_, __) => Image.asset(
                 assetName,
-                height: 29,
+                height: 48,
               ),
               large: (_, __) => Image.asset(
                 assetName,
-                height: 32,
+                height: 56,
               ),
             ),
     );
