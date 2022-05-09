@@ -140,59 +140,104 @@ class MainBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Center(
+      child: ResponsiveLayoutBuilder(
+        small: (_, __) => const MainBoardContent(
+          mainTitleFontSize: 40,
+          mainMessageHorizontalDividerSize: 300,
+          mainMessageHorizontalPadding: 48,
+          mainMessageFontSize: 26,
+          mainMessageMaxLines: 6,
+          mainSubTitleFontSize: 18,
+        ),
+        medium: (_, __) => const MainBoardContent(
+          mainMessageHorizontalDividerSize: 350,
+          mainMessageMaxLines: 4,
+          mainMessageHorizontalPadding: 100,
+        ),
+        large: (_, __) => const MainBoardContent(),
+      ),
+    );
+  }
+}
+
+class MainBoardContent extends StatelessWidget {
+  const MainBoardContent({
+    Key? key,
+    this.mainTitleFontSize = 50,
+    this.mainSubTitleFontSize = 22,
+    this.mainMessageFontSize = 42,
+    this.mainMessageMaxLines = 3,
+    this.mainMessageHorizontalPadding = 250,
+    this.mainMessageHorizontalDividerSize = 400,
+  }) : super(key: key);
+
+  final double mainTitleFontSize;
+  final double mainSubTitleFontSize;
+  final double mainMessageFontSize;
+  final int mainMessageMaxLines;
+  final double mainMessageHorizontalPadding;
+  final double mainMessageHorizontalDividerSize;
+
+  @override
+  Widget build(BuildContext context) {
     var l10n = context.l10n;
     var _gap = const ResponsiveHGap(
-      small: 20,
-      medium: 40,
+      small: 80,
+      medium: 120,
       large: 150,
     );
-    return Center(
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _gap,
-          Text(
-            l10n.mainTitle,
+
+    return Column(
+      // mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        _gap,
+        Text(
+          l10n.mainTitle,
+          style: GoogleFonts.courierPrime(
+            fontSize: mainTitleFontSize,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(height: 40),
+        Text(
+          l10n.mainSubTitle,
+          style: GoogleFonts.courierPrime(
+              fontSize: mainSubTitleFontSize, color: Colors.white),
+        ),
+        const SizedBox(height: 10),
+        Container(
+            color: Colors.grey,
+            height: 2,
+            width: mainMessageHorizontalDividerSize),
+        const SizedBox(height: 40),
+        Padding(
+          padding:
+              EdgeInsets.symmetric(horizontal: mainMessageHorizontalPadding),
+          child: Text(
+            l10n.mainMessage,
+            textAlign: TextAlign.center,
+            softWrap: true,
+            maxLines: mainMessageMaxLines,
             style: GoogleFonts.courierPrime(
-              fontSize: 50,
+              fontSize: mainMessageFontSize,
               color: Colors.white,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w100,
             ),
           ),
-          const SizedBox(height: 40),
-          Text(
-            l10n.mainSubTitle,
-            style: GoogleFonts.courierPrime(fontSize: 16, color: Colors.white),
-          ),
-          const SizedBox(height: 10),
-          Container(color: Colors.grey, height: 2, width: 400),
-          const SizedBox(height: 40),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 430),
+        ),
+        const SizedBox(height: 50),
+        ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(primary: const Color(0x8866BB6A)),
             child: Text(
-              l10n.mainMessage,
-              textAlign: TextAlign.center,
-              softWrap: true,
-              maxLines: 3,
-              style: GoogleFonts.courierPrime(
-                fontSize: 32,
-                color: Colors.white,
-                fontWeight: FontWeight.w100,
-              ),
-            ),
-          ),
-          const SizedBox(height: 50),
-          ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(primary: Color(0x8866BB6A)),
-              child: Text(
-                l10n.mainMessageButton,
-                style:
-                    GoogleFonts.courierPrime(fontSize: 16, color: Colors.white),
-              ))
-        ],
-      ),
+              l10n.mainMessageButton,
+              style:
+                  GoogleFonts.courierPrime(fontSize: 16, color: Colors.white),
+            ))
+      ],
     );
   }
 }
