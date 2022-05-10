@@ -1,5 +1,7 @@
-part of 'main_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
+@immutable
 abstract class MainState extends Equatable {
   const MainState();
 }
@@ -7,4 +9,13 @@ abstract class MainState extends Equatable {
 class MainInitial extends MainState {
   @override
   List<Object> get props => [];
+}
+
+class MessageFormVisibility extends MainState {
+  const MessageFormVisibility({required this.show});
+
+  final bool show;
+
+  @override
+  List<Object?> get props => [show];
 }
