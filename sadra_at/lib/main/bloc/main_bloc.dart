@@ -1,15 +1,20 @@
-import 'dart:async';
+import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'main_event.dart';
-part 'main_state.dart';
+import 'bloc.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
   MainBloc() : super(MainInitial()) {
     on<MainEvent>((event, emit) {
-      // TODO: implement event handler
+      log(emit.isDone.toString(), name: 'bloc1');
+      log(event.toString(), name: 'bloc2');
+      if (event is HideMainMessageFormEvent) {
+        emit(const MessageFormVisibility(show: false));
+      }
+      if (event is ShowMainMessageFormEvent) {
+        emit(const MessageFormVisibility(show: true));
+      }
     });
   }
 }
