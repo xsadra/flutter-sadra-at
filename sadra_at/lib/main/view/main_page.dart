@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sadra_at/layout/layout.dart';
 
 import '../../l10n/l10n.dart';
+import '../../layout/layout.dart';
+import '../bloc/bloc.dart';
 import '../main.dart';
 
 class MainPage extends StatelessWidget {
@@ -10,7 +12,10 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MainView();
+    return BlocProvider(
+      create: (_) => MainBloc(),
+      child: const MainView(),
+    );
   }
 }
 
@@ -30,9 +35,13 @@ class _Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context
+        .read<MainBloc>()
+        .add(HideMainMessageFormEvent()); //TODO: Remove it later
     return LayoutBuilder(
       builder: (context, constraints) {
         return Stack(
+          alignment: Alignment.center,
           children: [
             SizedBox(
               height: double.infinity,
@@ -49,10 +58,42 @@ class _Main extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
+            BlocBuilder<MainBloc, MainState>(
+              builder: (context, state) {
+                if (state is MessageFormVisibility) {
+                  return AnimatedPositioned(
+                    top: state.show ? 500 : -600,
+                    duration: const Duration(milliseconds: 300),
+                    child: const MainMessageForm(),
+                  );
+                }
+                return const SizedBox();
+              },
+            ),
           ],
         );
       },
+    );
+  }
+}
+
+class MainMessageForm extends StatelessWidget {
+  const MainMessageForm({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blue,
+      height: 500,
+      width: 500,
+      child: ElevatedButton(
+        onPressed: () =>
+            context.read<MainBloc>().add(HideMainMessageFormEvent()),
+        child: const Icon(Icons.close),
+      ),
     );
   }
 }
@@ -230,7 +271,8 @@ class MainBoardContent extends StatelessWidget {
         ),
         const SizedBox(height: 50),
         ElevatedButton(
-            onPressed: () {},
+            onPressed: () =>
+                context.read<MainBloc>().add(ShowMainMessageFormEvent()),
             style: ElevatedButton.styleFrom(primary: const Color(0x8866BB6A)),
             child: Text(
               l10n.mainMessageButton,

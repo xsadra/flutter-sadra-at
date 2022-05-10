@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart' as http;
-import 'package:sadra_at/main/main.dart';
 
 import '../../helpers/helpers.dart';
+import '../../main/main.dart';
 
 class App extends StatefulWidget {
   const App({Key? key, ValueGetter<PlatformHelper>? platformHelperFactory})
