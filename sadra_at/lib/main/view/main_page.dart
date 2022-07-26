@@ -35,9 +35,7 @@ class _Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context
-        .read<MainBloc>()
-        .add(HideMainMessageFormEvent()); //TODO: Remove it later
+    context.read<MainBloc>().add(HideMainMessageFormEvent());
     return LayoutBuilder(
       builder: (context, constraints) {
         return Stack(
@@ -62,10 +60,21 @@ class _Main extends StatelessWidget {
             BlocBuilder<MainBloc, MainState>(
               builder: (context, state) {
                 if (state is MessageFormVisibility) {
-                  return AnimatedPositioned(
-                    top: state.show ? 500 : -600,
-                    duration: const Duration(milliseconds: 300),
-                    child: const MainMessageForm(),
+                  return Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      if (state.show)
+                        Container(
+                          color: Colors.black38,
+                          height: double.infinity,
+                          width: double.infinity,
+                        ),
+                      AnimatedPositioned(
+                        top: state.show ? 200 : -800,
+                        duration: const Duration(milliseconds: 400),
+                        child: MainMessageForm(),
+                      ),
+                    ],
                   );
                 }
                 return const SizedBox();
@@ -79,22 +88,100 @@ class _Main extends StatelessWidget {
 }
 
 class MainMessageForm extends StatelessWidget {
-  const MainMessageForm({
+  MainMessageForm({
     Key? key,
   }) : super(key: key);
 
+  final controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    String inputString = '';
+    bool isFormEnabled = true;
     return Container(
-      color: Colors.blue,
-      height: 500,
-      width: 500,
-      child: ElevatedButton(
-        onPressed: () =>
-            context.read<MainBloc>().add(HideMainMessageFormEvent()),
-        child: const Icon(Icons.close),
-      ),
-    );
+        padding: const EdgeInsets.all(30),
+        height: 650,
+        width: 500,
+        decoration: BoxDecoration(
+          color: Colors.white70,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              top: 50,
+              child: Container(
+                padding: const EdgeInsets.all(0),
+                height: 50,
+                width: 400,
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        width: 2,
+                        color: Colors.black87,
+                        style: BorderStyle.solid),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 80,
+                      height: double.infinity,
+                      // color: Colors.green.shade900,
+                      decoration: BoxDecoration(
+                        color: Colors.green.shade900,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          bottomLeft: Radius.circular(8),
+                        ),
+                      ),
+                      child: const Center(
+                        child: Text('Name',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20)),
+                      ),
+                    ),
+                    Container(
+                        width: 2,
+                        height: double.infinity,
+                        color: Colors.black87),
+                    Container(
+                      color: Colors.red,
+                      // child: TextField(
+                      //   onChanged: (value) {},
+                      //   // enabled: isFormEnabled,
+                      //   // //onSubmitted: (_) => _validateTag(),
+                      //   // controller: controller,
+                      //   // keyboardType: TextInputType.text,
+                      //   // textCapitalization: TextCapitalization.characters,
+                      //   // // inputFormatters: [UpperCaseTextFormatter()],
+                      //   // textInputAction: TextInputAction.search,
+                      //   // maxLength: 10,
+                      //   // maxLines: 1,
+                      //   // style: const TextStyle(
+                      //   //     fontWeight: FontWeight.bold,
+                      //   //     color: Color(0xFF00893F)),
+                      //   // decoration: const InputDecoration(
+                      //   //   // errorText:
+                      //   //   // showError ? AppTexts.error.findTagTextFieldError : null,
+                      //   //   fillColor: Colors.blueGrey,
+                      //   //   // labelText: AppTexts.body.findTagTextFieldLabel,
+                      //   //   labelStyle: TextStyle(
+                      //   //     fontWeight: FontWeight.bold,
+                      //   //     color: Colors.black54,
+                      //   //   ),
+                      //   //   prefixIcon: Icon(Icons.tag, color: Colors.green),
+                      //   //   border: OutlineInputBorder(),
+                      //   //   // hintText: AppTexts.body.findTagTextFieldHint,
+                      //   //   hintStyle: TextStyle(color: Colors.teal),
+                      //   // ),
+                      // ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ));
   }
 }
 
