@@ -1,0 +1,39 @@
+{
+    "@@locale": "en",
+    "mainTitle": "I am Sadra",
+    "@mainTitle": {
+        "description": "Shown as a main title"
+    },
+    "mainSubTitle": "And I'm a Programmer",
+    "@mainSubTitle": {
+        "description": "Shown as a main Sub Title"
+    },
+
+    "mainMessage": "If you want to send me a message, just click on the button below",
+    "@mainMessage": {
+        "description": "Shown as a main message text"
+    },
+    "mainMessageButton": "Message Me",
+    "@mainMessageButton": {
+        "description": "Shown as a main Message Button text"
+    },
+
+    "puzzleTileLabelText": "Value: {value}, position: {x}, {y}",
+    "@puzzleTileLabelText": {
+        "description": "Semantic label for the ...",
+        "placeholders": {
+            "value": {
+                "type": "String",
+                "example": "5"
+            },
+            "x": {
+                "type": "String",
+                "example": "1"
+            },
+            "y": {
+                "type": "String",
+                "example": "0"
+            }
+        }
+    }
+}
